@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ABLesson-1</string>
+    <string name="weather_forecast">Weather forecast!</string>
+    <string name="moscow">Moscow</string>
+    <string name="st_petersburg">St. Petersburg</string>
+    <string name="sochi">Sochi</string>
+    <string name="empty"> </string>
+    <string name="choose_a_city">Choose a city</string>
+</resources>

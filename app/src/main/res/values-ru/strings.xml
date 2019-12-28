@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Урок-1</string>
+    <string name="weather_forecast">Прогноз погоды!</string>
+    <string name="moscow">Москва</string>
+    <string name="st_petersburg">Санкт-Петербург</string>
+    <string name="sochi">Сочи</string>
+    <string name="empty"> </string>
+    <string name="choose_a_city">Выбор города</string>
+</resources>
