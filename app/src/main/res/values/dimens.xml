@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="textSize30">30sp</dimen>
-    <dimen name="textSize20">20sp</dimen>
+    <dimen name="text_size_35">35sp</dimen>
+    <dimen name="text_size_30">30sp</dimen>
+    <dimen name="First_page_button">280dp</dimen>
 </resources>
