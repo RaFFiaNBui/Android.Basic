@@ -1,56 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/weather_forecast"
-        android:textSize="@dimen/textSize30"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/empty"
-        android:textSize="@dimen/textSize30" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="325dp"
-        android:src="@drawable/weather1" />
-
-    <Button
-        android:id="@+id/button"
+    <LinearLayout
+        android:id="@+id/LinearLayout_loading"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/textSize20"
-        android:text="@string/moscow" />
+        android:layout_height="match_parent"
+        android:background="@drawable/sky"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button2"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loading"
+            android:textSize="@dimen/text_size_30" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="45dp" />
+
+        <Button
+            android:id="@+id/button_loading"
+            android:layout_width="167dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorSky"
+            android:text="@string/enter"
+            android:textAllCaps="false"
+            android:textSize="@dimen/text_size_30"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/FrameLayout_first_page"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/textSize20"
-        android:text="@string/st_petersburg" />
+        android:layout_height="match_parent"
+        android:background="@drawable/first_page"
+        android:visibility="gone">
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/textSize20"
-        android:text="@string/sochi" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="@string/weather_forecast"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_size_35" />
 
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/textSize20"
-        android:text="@string/choose_a_city" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
 
-</LinearLayout>
+
+            <Button
+                android:id="@+id/button_Moscow"
+                android:layout_width="@dimen/first_page_button"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@color/colorGray"
+                android:fontFamily="serif"
+                android:text="@string/moscow"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_size_30"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button_St_Petersburg"
+                android:layout_width="@dimen/first_page_button"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@color/colorGray"
+                android:fontFamily="serif"
+                android:text="@string/st_petersburg"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_size_30"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button_Sochi"
+                android:layout_width="@dimen/first_page_button"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@color/colorGray"
+                android:fontFamily="serif"
+                android:text="@string/sochi"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_size_30"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/LL_enter_city"
+                android:layout_width="@dimen/first_page_button"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:weightSum="6">
+
+                <EditText
+                    android:id="@+id/ET_enter_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:background="@color/colorGray"
+                    android:cursorVisible="false"
+                    android:fontFamily="serif"
+                    android:freezesText="false"
+                    android:gravity="center"
+                    android:hint="@string/enter_city"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:textAllCaps="false"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btn_enter_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorGray"
+                    android:text="@string/enter1"
+                    android:textAllCaps="false"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>
