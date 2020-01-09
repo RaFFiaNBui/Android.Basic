@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements Constants {
 
-    //лисенер на кнопку "Запустить"
+    //лисенер на кнопку "Запустить" **временно
     private final View.OnClickListener onClickListenerLoading = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
         buttonLoading.setOnClickListener(onClickListenerLoading);
 
         Toast.makeText(this, "Приложение запускается", Toast.LENGTH_SHORT).show();
-        Log.d("AppState", "method onCreate is called");
+        Log.d("MainActivity", "method onCreate is called");
 
         //вешаем Listener на кнопки
         Button buttonMsc = findViewById(R.id.button_Moscow);
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d("AppState", "method onStart is called");
+        Log.d("MainActivity", "method onStart is called");
     }
 
     @Override
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
         super.onRestoreInstanceState(inState);
         temp = inState.getInt(TEMPERATURE);
         tempValue.setText(String.valueOf(temp));
-        Log.d("AppState", "Data recovery");
+        Log.d("MainActivity", "Data recovery");
         cityName.setText(MainPresenter.getInstance().getCity());
     }
 
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
     protected void onResume() {
         super.onResume();
         Toast.makeText(getApplicationContext(), "Приложение восстановлено", Toast.LENGTH_SHORT).show();
-        Log.d("AppState", "method onResume is called");
+        Log.d("MainActivity", "method onResume is called");
     }
 
     @Override
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
         super.onSaveInstanceState(outState);
         temp = 20;
         outState.putInt(TEMPERATURE, temp);
-        Log.d("AppState", "Data storage");
+        Log.d("MainActivity", "Data storage");
         MainPresenter.getInstance().changeCity();
     }
 
@@ -111,19 +111,19 @@ public class MainActivity extends AppCompatActivity implements Constants {
     protected void onStop() {
         super.onStop();
         Toast.makeText(getApplicationContext(), "Приложение свернуто", Toast.LENGTH_SHORT).show();
-        Log.d("AppState", "method onStop is called");
+        Log.d("MainActivity", "method onStop is called");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d("AppState", "method onRestart is called");
+        Log.d("MainActivity", "method onRestart is called");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         Toast.makeText(getApplicationContext(), "Приложение закрыто", Toast.LENGTH_SHORT).show();
-        Log.d("AppState", "method onDestroy is called");
+        Log.d("MainActivity", "method onDestroy is called");
     }
 }
