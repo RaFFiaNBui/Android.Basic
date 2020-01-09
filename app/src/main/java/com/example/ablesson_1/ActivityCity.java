@@ -91,36 +91,23 @@ public class ActivityCity extends AppCompatActivity implements Constants {
             return;
         }
         if (resultCode == RESULT_OK) {
+            final boolean tempSun = data.getBooleanExtra(SUN, true);
+            final boolean tempPressure = data.getBooleanExtra(PRESSURE, true);
+            final boolean tempWind = data.getBooleanExtra(WIND, true);
             //отрисовка восхода и заката
             TableRow TRSunset = findViewById(R.id.sunset_row);
             TableRow TRSunrise = findViewById(R.id.sunrise_row);
-            if (data.getExtras().getBoolean(SUN)) {
-                sunrise = true;
-                TRSunset.setVisibility(View.VISIBLE);
-                TRSunrise.setVisibility(View.VISIBLE);
-            } else {
-                sunrise = false;
-                TRSunset.setVisibility(View.GONE);
-                TRSunrise.setVisibility(View.GONE);
-            }
+            sunrise = tempSun;
+            TRSunset.setVisibility(tempSun ? View.VISIBLE : View.GONE);
+            TRSunrise.setVisibility(tempSun ? View.VISIBLE : View.GONE);
             //отрисовка давления
             TableRow TRPressure = findViewById(R.id.pressure_row);
-            if (data.getExtras().getBoolean(PRESSURE)) {
-                pressure = true;
-                TRPressure.setVisibility(View.VISIBLE);
-            } else {
-                pressure = false;
-                TRPressure.setVisibility(View.GONE);
-            }
+            pressure = tempPressure;
+            TRPressure.setVisibility(tempPressure ? View.VISIBLE : View.GONE);
             //отрисовка ветра
             TableRow TRWind = findViewById(R.id.wind_row);
-            if (data.getExtras().getBoolean(WIND)) {
-                wind = true;
-                TRWind.setVisibility(View.VISIBLE);
-            } else {
-                wind = false;
-                TRWind.setVisibility(View.GONE);
-            }
+            wind = tempWind;
+            TRWind.setVisibility(tempWind ? View.VISIBLE : View.GONE);
         }
     }
 

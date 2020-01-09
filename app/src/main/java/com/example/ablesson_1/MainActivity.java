@@ -24,20 +24,20 @@ public class MainActivity extends AppCompatActivity implements Constants {
     };
 
     //лисенер на кнопки выбора города
-    private final View.OnClickListener CityListener = new View.OnClickListener() {
+    private final View.OnClickListener cityListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent CityIntent = new Intent(MainActivity.this, ActivityCity.class);
+            Intent cityIntent = new Intent(MainActivity.this, ActivityCity.class);
             EditText EnterCity = findViewById(R.id.ET_enter_city);
             switch (v.getId()) {
                 case R.id.btn_enter_city:
-                    CityIntent.putExtra(CITY, EnterCity.getText().toString());
+                    cityIntent.putExtra(CITY, EnterCity.getText().toString());
                     break;
                 default:
-                    CityIntent.putExtra(CITY, ((Button) v).getText().toString());
+                    cityIntent.putExtra(CITY, ((Button) v).getText().toString());
                     break;
             }
-            startActivity(CityIntent);
+            startActivity(cityIntent);
         }
     };
 
@@ -64,16 +64,16 @@ public class MainActivity extends AppCompatActivity implements Constants {
 
         //вешаем Listener на кнопки
         Button buttonMsc = findViewById(R.id.button_Moscow);
-        buttonMsc.setOnClickListener(CityListener);
+        buttonMsc.setOnClickListener(cityListener);
 
         Button buttonSpb = findViewById(R.id.button_St_Petersburg);
-        buttonSpb.setOnClickListener(CityListener);
+        buttonSpb.setOnClickListener(cityListener);
 
         Button buttonSochi = findViewById(R.id.button_Sochi);
-        buttonSochi.setOnClickListener(CityListener);
+        buttonSochi.setOnClickListener(cityListener);
 
         Button buttonEnterCity = findViewById(R.id.btn_enter_city);
-        buttonEnterCity.setOnClickListener(CityListener);
+        buttonEnterCity.setOnClickListener(cityListener);
     }
 
     @Override
