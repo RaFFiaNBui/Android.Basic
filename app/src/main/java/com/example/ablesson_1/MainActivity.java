@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
         temp = inState.getInt(TEMPERATURE);
         tempValue.setText(String.valueOf(temp));
         Log.d("AppState", "Data recovery");
-        cityName.setText(String.valueOf(MainPresenter.getInstance().getCity()));
+        cityName.setText(MainPresenter.getInstance().getCity());
     }
 
     @Override
