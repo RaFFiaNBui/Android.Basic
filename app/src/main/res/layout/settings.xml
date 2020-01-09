@@ -15,7 +15,7 @@
         android:textSize="@dimen/text_size_30" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/switch_theme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="10dp"
