@@ -23,20 +23,26 @@
         android:text="@string/black_theme" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/checkBox_sun"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sunrise_sunset" />
 
     <CheckBox
-        android:id="@+id/checkBox2"
+        android:id="@+id/checkBox_pressure"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/pressure" />
 
     <CheckBox
-        android:id="@+id/checkBox3"
+        android:id="@+id/checkBox_wind"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/wind_speed" />
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save" />
 </LinearLayout>
