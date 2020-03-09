@@ -1,10 +1,10 @@
 package com.example.ablesson_1.model;
 
 public class Wind {
-    private int speed;
+    private float speed;
 
     public int getSpeed() {
-        return speed;
+        return Math.round(speed);
     }
 
     public void setSpeed(int speed) {
