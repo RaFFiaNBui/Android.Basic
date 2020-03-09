@@ -1,11 +1,5 @@
 package com.example.ablesson_1;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +8,17 @@ import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -55,7 +60,6 @@ public class CityFragment extends Fragment implements Constants {
         WeekAdapter weekAdapter = new WeekAdapter(data);
         //устанавливаем нашему списку адаптер
         recyclerView.setAdapter(weekAdapter);
-
         //инициализация фонового изображения
         ScrollView scrollView = view.findViewById(R.id.scrollView);
         SharedPreferences sharedPref = this.getActivity().getSharedPreferences(SHARED_PREFERENCE_KEY, MODE_PRIVATE);
@@ -64,6 +68,10 @@ public class CityFragment extends Fragment implements Constants {
         } else {
             scrollView.setBackgroundResource(R.drawable.sky_day);
         }
+        //отображение текущей даты
+        setDate(view);
+        //устанавливаем соединение и сетим полученные данные
+        new Connection(view);
     }
 
     @Override
@@ -96,5 +104,23 @@ public class CityFragment extends Fragment implements Constants {
             TableRow TRWind = v.findViewById(R.id.wind_row);
             TRWind.setVisibility(tempWind ? View.VISIBLE : View.GONE);
         }
+    }
+
+    //метод отображения текущей даты
+    private void setDate(View view) {
+        Date currentDate = new Date();
+        TextView textViewCurrentDate = view.findViewById(R.id.current_date);
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        textViewCurrentDate.setText(dateFormat.format(currentDate));
+
+        //установка дня недели
+        TextView textViewDayOfWeek = view.findViewById(R.id.current_day_of_week);
+        DateFormat dayOfWeekFormat = new SimpleDateFormat("EEEE", Locale.getDefault());
+        textViewDayOfWeek.setText(dayOfWeekFormat.format(currentDate));
+
+        //установка времени
+        TextView textViewCurrentTime = view.findViewById(R.id.current_time);
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        textViewCurrentTime.setText(timeFormat.format(currentDate));
     }
 }
