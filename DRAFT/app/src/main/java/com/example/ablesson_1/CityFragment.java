@@ -24,6 +24,8 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class CityFragment extends Fragment implements Constants {
 
+    private String currentCity = "Moscow";
+
     // Фабричный метод создания фрагмента
     // Фрагменты рекомендуется создавать через фабричные методы.
     static CityFragment create(Parcel parcel) {
@@ -71,7 +73,7 @@ public class CityFragment extends Fragment implements Constants {
         //отображение текущей даты
         setDate(view);
         //устанавливаем соединение и сетим полученные данные
-        new Connection(view);
+        new Connection(view, currentCity);
     }
 
     @Override
@@ -83,6 +85,7 @@ public class CityFragment extends Fragment implements Constants {
         changeSettings(layout);
         Parcel parcel = getParcel();
         textViewCity.setText(parcel.getCityName());
+        currentCity = parcel.getCityName();
         return layout;
     }
 

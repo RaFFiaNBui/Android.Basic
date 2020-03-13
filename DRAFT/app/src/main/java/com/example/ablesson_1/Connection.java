@@ -23,7 +23,8 @@ import javax.net.ssl.HttpsURLConnection;
 class Connection {
 
     private static final String WEATHER_API_KEY = "14f34cd242746f2d76bb04739d7485fe"; //временный Api
-    private String WEATHER_URL_CITY = "https://api.openweathermap.org/data/2.5/weather?q=moscow&units=metric&appid=";
+    private String WEATHER_URL_PART1 = "https://api.openweathermap.org/data/2.5/weather?q=";
+    private String WEATHER_URL_PART2 = "&units=metric&appid=";
 
     private TextView currentName;
     private TextView currentTemperature;
@@ -33,9 +34,9 @@ class Connection {
     private TextView currentPressure;
     private TextView windSpeed;
 
-    Connection(final View view) {
+    Connection(final View view, String city) {
         try {
-            final URL uri = new URL(WEATHER_URL_CITY + WEATHER_API_KEY);
+            final URL uri = new URL(WEATHER_URL_PART1 + city + WEATHER_URL_PART2 + WEATHER_API_KEY);
             final Handler handler = new Handler(); //запоминаем основной поток
             new Thread(new Runnable() {
                 @Override
