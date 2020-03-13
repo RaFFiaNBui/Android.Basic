@@ -1,7 +1,5 @@
 package com.example.ablesson_1;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,78 +7,97 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import static com.example.ablesson_1.CityFragment.PARCEL;
+public class SettingsActivity extends BaseActivity {
 
-public class SettingsActivity extends AppCompatActivity implements Constants {
-
-    private Switch darkSwitch;
     private CheckBox checkBoxSun;
     private CheckBox checkBoxPressure;
     private CheckBox checkBoxWind;
 
-    SharedPreferences sPrefSettings;
-    private boolean darkTheme;
+
+    private final View.OnClickListener saveCheckBoxSettings = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            SharedPreferences sharedPref = getSharedPreferences(SHARED_PREFERENCE_KEY, MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            switch (v.getId()) {
+                case R.id.checkBox_sun:
+                    editor.putBoolean(SUN, checkBoxSun.isChecked());
+                    break;
+                case R.id.checkBox_pressure:
+                    editor.putBoolean(PRESSURE, checkBoxPressure.isChecked());
+                    break;
+                case R.id.checkBox_wind:
+                    editor.putBoolean(WIND, checkBoxWind.isChecked());
+                    break;
+            }
+            editor.apply();
+        }
+    };
+    private final View.OnClickListener exitFromSettings = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            SharedPreferences sharedPref = getSharedPreferences(SHARED_PREFERENCE_KEY, MODE_PRIVATE);
+            boolean bool = sharedPref.getBoolean(SUN, true);
+            String string = Boolean.toString(bool);
+            boolean boo222 = checkBoxSun.isChecked();
+            String str = Boolean.toString(boo222);
+            Log.d("fff", string + str);
+            Intent result = new Intent();
+            setResult(RESULT_OK, result);
+            finish();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
 
-        //вытаскиваем значения чекбоксов
-        loadSettings();
-
-        final Parcel parcel = (Parcel) getIntent().getExtras().getSerializable(PARCEL);
+        //установка темы
+        Switch switchTheme = findViewById(R.id.switch_theme);
+        //устанавливаем свичу значение, лежащее в SharedPreferences
+        switchTheme.setChecked(isDarkTheme());
+        //вешаем слушатель
+        switchTheme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //сохраняем настройки темы в SharedPreferences
+                setDarkTheme(isChecked);
+                //и сразу перезапускаем активити с новыми настройками
+                recreate();
+            }
+        });
         checkBoxSun = findViewById(R.id.checkBox_sun);
-        checkBoxSun.setChecked(parcel.ParSun);
-
         checkBoxPressure = findViewById(R.id.checkBox_pressure);
-        checkBoxPressure.setChecked(parcel.ParPressure);
-
         checkBoxWind = findViewById(R.id.checkBox_wind);
-        checkBoxWind.setChecked(parcel.ParWind);
-
+        //установка остальных параметров
+        setOtherSettings();
+        //вешаем лисенеры на чекбоксы, которые сохраняет значения свих чекбоксов в SharedPreferences
+        checkBoxSun.setOnClickListener(saveCheckBoxSettings);
+        checkBoxPressure.setOnClickListener(saveCheckBoxSettings);
+        checkBoxWind.setOnClickListener(saveCheckBoxSettings);
         //Listener на кнопку Сохранить
         Button btnSave = findViewById(R.id.button_save);
-        btnSave.setOnClickListener(save);
+        btnSave.setOnClickListener(exitFromSettings);
     }
 
-    private final View.OnClickListener save = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            saveSettings();
-            Intent result = new Intent();
-            //передаем значения чекбоксов
-            result.putExtra(SUN, (checkBoxSun.isChecked()));
-            result.putExtra(PRESSURE, (checkBoxPressure.isChecked()));
-            result.putExtra(WIND, (checkBoxWind.isChecked()));
-            setResult(RESULT_OK, result);
-            finish();
-        }
-    };
-
-    void loadSettings() {
-        sPrefSettings = getSharedPreferences(MY_SETTINGS, MODE_PRIVATE);
-        darkTheme = sPrefSettings.getBoolean(DARK_THEME, false);
-        darkSwitch = findViewById(R.id.switch_theme);
-        darkSwitch.setChecked(darkTheme);
+    //Чтение настроек, остальные параметры
+    private void setOtherSettings() {
+        SharedPreferences sharedPref = getSharedPreferences(SHARED_PREFERENCE_KEY, MODE_PRIVATE);
+        //устанавливаем чекбоксам значение, лежащее в SharedPreferences или поумолчанию - видимы
+        checkBoxSun.setChecked(sharedPref.getBoolean(SUN, true));
+        checkBoxPressure.setChecked(sharedPref.getBoolean(PRESSURE, true));
+        checkBoxWind.setChecked(sharedPref.getBoolean(WIND, true));
     }
 
-    void saveSettings() {
-        darkTheme = darkSwitch.isChecked();
-        Log.d("AppState", Boolean.toString(darkTheme));
-        sPrefSettings = getSharedPreferences(MY_SETTINGS, MODE_PRIVATE);
-        SharedPreferences.Editor ed = sPrefSettings.edit();
-        ed.putBoolean(DARK_THEME, darkTheme);
-        ed.apply();
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         Toast.makeText(getApplicationContext(), "Настройки сохранены", Toast.LENGTH_SHORT).show();
-        Log.d("SettingsActivity", "Настройки сохранены, ActivitySettings закрыта");
     }
 }

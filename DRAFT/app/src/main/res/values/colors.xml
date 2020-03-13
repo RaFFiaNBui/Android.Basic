@@ -5,7 +5,9 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorGreen">#21C621</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorGray">#AAFFFFFF</color>
-    <color name="colorSky">#773F90CB</color>
-    <color name="black">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGray">#BE000000</color>
+    <color name="colorItemWeek">#56107EB9</color>
+    <color name="colorDarkThemeBackground">#2E2E2E</color>
+    <color name="colorBlue">#03A9F4</color>
 </resources>
