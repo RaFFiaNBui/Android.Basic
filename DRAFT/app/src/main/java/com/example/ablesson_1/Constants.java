@@ -7,4 +7,5 @@ public interface Constants {
     String WIND = "Wind";
     String DARK_THEME = "dark_theme";
     String MY_SETTINGS = "MySettings";
+    String PARCEL = "parcel";
 }

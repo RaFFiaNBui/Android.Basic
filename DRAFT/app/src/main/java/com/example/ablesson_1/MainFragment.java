@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import static com.example.ablesson_1.CityFragment.PARCEL;
+import static com.example.ablesson_1.Constants.CITY;
 
 public class MainFragment extends Fragment {
 
@@ -73,7 +74,7 @@ public class MainFragment extends Fragment {
         //+ Здесь также востанавливаем Parcel
         if (savedInstanceState != null) {
             // Восстановление текущей позиции.
-            currentParcel = (Parcel) savedInstanceState.getSerializable("CurrentCity");
+            currentParcel = (Parcel) savedInstanceState.getSerializable(CITY);
         } else {
             //+ Если воcстановить не удалось, то сделаем пустой объект
             currentParcel = new Parcel(getResources().getStringArray(R.array.items)[0]);
@@ -89,7 +90,7 @@ public class MainFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         //+ Также меняем текущую позицию на Parcel
-        outState.putSerializable("CurrentCity", currentParcel);
+        outState.putSerializable(CITY, currentParcel);
         super.onSaveInstanceState(outState);
     }
 

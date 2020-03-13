@@ -7,8 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class CityFragment extends Fragment {
-    static final String PARCEL = "parcel";
+public class CityFragment extends Fragment implements Constants{
 
     // Фабричный метод создания фрагмента
     // Фрагменты рекомендуется создавать через фабричные методы.
