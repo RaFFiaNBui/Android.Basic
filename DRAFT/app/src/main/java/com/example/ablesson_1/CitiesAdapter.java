@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 
 public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.RecyclerViewHolder> {
 
@@ -55,6 +57,8 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.RecyclerVi
                 @Override
                 public void onClick(View v) {
                     clickListener.onItemClick(data);
+                    Snackbar.make(v, "Вы выбрали " + data, Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
                 }
             });
         }

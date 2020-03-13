@@ -6,13 +6,10 @@
 
     <TextView
         android:id="@+id/item_textView"
+        style="@style/MyItemStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_margin="5dp"
-        android:fontFamily="serif"
-        android:textColor="#000000"
-        android:textSize="@dimen/text_size_30"
-        android:textStyle="bold"
+        android:gravity="center"
         tools:text="Item" />
 </FrameLayout>

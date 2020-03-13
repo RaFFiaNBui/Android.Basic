@@ -2,6 +2,7 @@ package com.example.ablesson_1;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -9,19 +10,27 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
-import static com.example.ablesson_1.CityFragment.PARCEL;
-import static com.example.ablesson_1.Constants.CITY;
+import com.google.android.material.textfield.TextInputEditText;
 
-public class MainFragment extends Fragment {
+import java.util.regex.Pattern;
+
+import static android.content.Context.MODE_PRIVATE;
+
+public class MainFragment extends Fragment implements Constants {
 
     private boolean isLandscape;    // true - планшетная ориентация
     private Parcel currentParcel;   // Текущая посылка (название города)
+
+    private Pattern checkCityName = Pattern.compile("^[A-Z][a-z]{2,}$");
 
     //ClickListener на TextView поля списка RecyclerView
     private CitiesAdapter.RecyclerItemClickListener clickListener = new CitiesAdapter.RecyclerItemClickListener() {
@@ -31,6 +40,21 @@ public class MainFragment extends Fragment {
             currentParcel = new Parcel(data);
             //и запускается метод отображения с названием города
             showSecondFragment(currentParcel);
+        }
+    };
+
+    //ClickListener на кнопку ввода названия города
+    private View.OnClickListener enterCityListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //при клике создается новая посылка с названием города
+/*            TextInputEditText enterCity = v.findViewById(R.id.field_enter_city);
+            String str = enterCity.getText().toString();
+            if (enterCity.getText().toString() != null) {
+                currentParcel = new Parcel(str);
+                //и запускается метод отображения с названием города
+                showSecondFragment(currentParcel);
+            }*/
         }
     };
 
@@ -44,6 +68,20 @@ public class MainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        TextInputEditText cityName = view.findViewById(R.id.field_enter_city);
+        final Button btn = view.findViewById(R.id.btn_enter_city);
+        //проверка при потере фокуса
+        cityName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    btn.setVisibility(View.VISIBLE);
+                    return;
+                }
+                TextView tv = (TextView) v;
+                validate(tv, checkCityName, "Город не найден");
+            }
+        });
         //подтягиваем наш список городов
         String[] data = getResources().getStringArray(R.array.items);
         //инициализируем RecyclerView
@@ -60,6 +98,19 @@ public class MainFragment extends Fragment {
         citiesAdapter.setClickListener(clickListener);
         //устанавливаем нашему списку адаптер
         recyclerView.setAdapter(citiesAdapter);
+
+        Button buttonEnterCity = view.findViewById(R.id.btn_enter_city);
+        buttonEnterCity.setOnClickListener(enterCityListener);
+
+        //инициализация фонового изображения
+        ConstraintLayout constraintLayout = view.findViewById(R.id.mainFragmentLayout);
+        TextView textView = view.findViewById(R.id.textView);
+        SharedPreferences sharedPref = this.getActivity().getSharedPreferences(SHARED_PREFERENCE_KEY, MODE_PRIVATE);
+        if (sharedPref.getBoolean(IS_DARK_THEME, false)) {
+            textView.setBackgroundResource(R.color.colorBlue);
+        } else {
+            constraintLayout.setBackgroundResource(R.drawable.first_page);
+        }
     }
 
     @Override
@@ -125,100 +176,20 @@ public class MainFragment extends Fragment {
         }
     }
 
-/*
-    //лисенер на кнопки выбора города
-    private final View.OnClickListener cityListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent cityIntent = new Intent(MainFragment.this, CityFragment.class);
-            EditText EnterCity = findViewById(R.id.ET_enter_city);
-            switch (v.getId()) {
-                case R.id.btn_enter_city:
-                    cityIntent.putExtra(CITY, EnterCity.getText().toString());
-                    break;
-                default:
-                    cityIntent.putExtra(CITY, ((Button) v).getText().toString());
-                    break;
-            }
-            startActivity(cityIntent);
+    private void validate(TextView tv, Pattern check, String msg) {
+        String value = tv.getText().toString();
+        if (check.matcher(value).matches()) {
+            hideError(tv);
+        } else {
+            showError(tv, msg);
         }
-    };
-
-/*
-
-    private static final String TEMPERATURE = "temp key";
-    private int temp;
-    private TextView tempValue;
-    private TextView cityName;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_main);
-
-
-
-
-
-
-        Toast.makeText(this, "Приложение запускается", Toast.LENGTH_SHORT).show();
-        Log.d("MainFragment", "method onCreate is called");
-
-        //вешаем Listener на кнопки
-        Button buttonMsc = findViewById(R.id.button_Moscow);
-        buttonMsc.setOnClickListener(cityListener);
-
-        Button buttonSpb = findViewById(R.id.button_St_Petersburg);
-        buttonSpb.setOnClickListener(cityListener);
-
-        Button buttonSochi = findViewById(R.id.button_Sochi);
-        buttonSochi.setOnClickListener(cityListener);
-
-        Button buttonEnterCity = findViewById(R.id.btn_enter_city);
-        buttonEnterCity.setOnClickListener(cityListener);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d("MainFragment", "method onStart is called");
+    private void hideError(TextView tv) {
+        tv.setError(null);
     }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle inState) {
-        super.onRestoreInstanceState(inState);
-        temp = inState.getInt(TEMPERATURE);
-        tempValue.setText(String.valueOf(temp));
-        Log.d("MainFragment", "Data recovery");
-        cityName.setText(MainPresenter.getInstance().getCity());
+    private void showError(TextView tv, String msg) {
+        tv.setError(msg);
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Toast.makeText(getApplicationContext(), "Приложение восстановлено", Toast.LENGTH_SHORT).show();
-        Log.d("MainFragment", "method onResume is called");
-    }
-
-
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Toast.makeText(getApplicationContext(), "Приложение свернуто", Toast.LENGTH_SHORT).show();
-        Log.d("MainFragment", "method onStop is called");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d("MainFragment", "method onRestart is called");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Toast.makeText(getApplicationContext(), "Приложение закрыто", Toast.LENGTH_SHORT).show();
-        Log.d("MainFragment", "method onDestroy is called");
-    }*/
 }

@@ -1,12 +1,7 @@
 <resources>
     <string name="app_name">SRS Weather</string>
     <string name="weather_forecast">Choose a city</string>
-    <string name="moscow">Moscow</string>
-    <string name="st_petersburg">St. Petersburg</string>
-    <string name="sochi">Sochi</string>
     <string name="another_city">another city</string>
-    <string name="enter">Enter</string>
-    <string name="loading">Loading&#8230;</string>
     <string name="enter_city">Enter City</string>
     <string name="enter1">Enter</string>
     <string name="_23_12_2019">23.12.2019</string>
@@ -25,20 +20,6 @@
     <string name="wind_speed">Wind speed</string>
     <string name="_2">2</string>
     <string name="m_s">m/s</string>
-    <string name="_24_12">24.12</string>
-    <string name="tue">Tue</string>
-    <string name="_26">+26</string>
-    <string name="_20">+20</string>
-    <string name="_25_12">25.12</string>
-    <string name="wed">Wed</string>
-    <string name="_26_12">26.12</string>
-    <string name="thu">Thu</string>
-    <string name="_27_12">27.12</string>
-    <string name="fri">Fri</string>
-    <string name="_28_12">28.12</string>
-    <string name="sat">Sat</string>
-    <string name="_29_12">29.12</string>
-    <string name="sun">Sun</string>
     <string name="black_theme">Black Theme</string>
     <string name="sunrise_sunset">Sunrise / Sunset</string>
     <string name="settings">Settings</string>
@@ -47,5 +28,7 @@
     <string name="percent">%</string>
     <string name="save">Save</string>
     <string name="image">image</string>
-
+    <string name="about_developers">О разработчиках</string>
+    <string name="developer">Самарин Роман Сергеевич</string>
+    <string name="my_mail"><u>raffian_bui@mail.ru</u></string>
 </resources>
