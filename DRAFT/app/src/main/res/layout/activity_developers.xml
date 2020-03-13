@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".DevelopersActivity">
 
     <TextView
         style="@style/MyItemStyle"
-        android:layout_marginTop="150dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -16,10 +16,9 @@
 
     <TextView
         android:id="@+id/my_mail"
+        style="@style/MyMailStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_gravity="center"
-        android:text="@string/my_mail"
-        style="@style/MyMailStyle" />
+        android:text="@string/my_mail" />
 </LinearLayout>

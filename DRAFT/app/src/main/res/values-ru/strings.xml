@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SRS Weather</string>
+
     <string name="weather_forecast">Выберите город</string>
-    <string name="another_city">другой город</string>
     <string name="enter_city">Введите город</string>
     <string name="enter1">Ввод</string>
-    <string name="_23_12_2019">23.12.2019</string>
-    <string name="monday">Понедельник</string>
-    <string name="_18_55">18:55</string>
-    <string name="_25">+25</string>
+
+    <string name="image">Картинка</string>
     <string name="divided"> / </string>
     <string name="_19">+19</string>
+    <string name="humidity">Влажность</string>
+    <string name="percent">%</string>
     <string name="sunrise">Восход</string>
-    <string name="_07_00">07:00</string>
     <string name="sunset">Закат</string>
-    <string name="_21_00">21:00</string>
     <string name="pressure">Давление</string>
-    <string name="_743">743</string>
     <string name="mmhg_st">мм.рт.ст</string>
     <string name="wind_speed">Ветер</string>
-    <string name="_2">2</string>
     <string name="m_s">м/с</string>
+
+    <string name="about_developers">О разработчиках</string>
+    <string name="settings">Настройки</string>
     <string name="black_theme">Темная тема</string>
     <string name="sunrise_sunset">Восход / Закат</string>
-    <string name="settings">Настройки</string>
-    <string name="humidity">Влажность</string>
-    <string name="_77">77</string>
-    <string name="percent">%</string>
     <string name="save">Сохранить</string>
-    <string name="image">image</string>
-    <string name="about_developers">О разработчиках</string>
+
     <string name="developer">Самарин Роман Сергеевич</string>
     <string name="my_mail"><u>raffian_bui@mail.ru</u></string>
+    <string name="error">Ошибка!</string>
+    <string name="city_not_found">Город не найден</string>
 </resources>

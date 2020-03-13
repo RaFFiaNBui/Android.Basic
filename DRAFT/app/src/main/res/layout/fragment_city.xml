@@ -31,31 +31,31 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/today_date"
+                    android:id="@+id/current_date"
                     style="@style/MyTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/_23_12_2019" />
+                    tools:text="23.12.2019" />
 
                 <TextView
-                    android:id="@+id/today_day_of_week"
+                    android:id="@+id/current_day_of_week"
                     style="@style/MyTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/monday" />
+                    tools:text="Понедельник" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/today_time"
+                android:id="@+id/current_time"
                 style="@style/MyTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/_18_55"
-                android:textSize="40sp" />
+                android:textSize="40sp"
+                tools:text="18:55" />
         </LinearLayout>
 
         <TextView
@@ -110,7 +110,6 @@
                         android:id="@+id/t_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/_25"
                         android:textColor="?attr/myTextColor"
                         android:textSize="40sp" />
 
@@ -150,7 +149,6 @@
                             android:id="@+id/humidity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/_77"
                             android:textColor="?attr/myTextColor" />
 
                         <TextView
@@ -177,7 +175,6 @@
                             android:id="@+id/sunrise"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/_07_00"
                             android:textColor="?attr/myTextColor" />
                     </TableRow>
 
@@ -197,7 +194,6 @@
                             android:id="@+id/sunset"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/_21_00"
                             android:textColor="?attr/myTextColor" />
                     </TableRow>
 
@@ -217,7 +213,6 @@
                             android:id="@+id/pressure"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/_743"
                             android:textColor="?attr/myTextColor" />
 
                         <TextView
@@ -243,7 +238,6 @@
                             android:id="@+id/wind"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/_2"
                             android:textColor="?attr/myTextColor" />
 
                         <TextView
