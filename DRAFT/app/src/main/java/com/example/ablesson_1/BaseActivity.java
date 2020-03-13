@@ -13,25 +13,37 @@ import android.widget.TableRow;
 public class BaseActivity extends AppCompatActivity implements Constants {
 
     private static final int SETTINGS_CODE = 555;
+    private boolean currentThemeIsDark; //true - текущая тема ТЕМНАЯ
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        super.onCreate(savedInstanceState);
-
         //установим тему
         if (isDarkTheme()) {
             setTheme(R.style.DarkTheme);
+            currentThemeIsDark = true;
         } else {
             setTheme(R.style.AppTheme);
+            currentThemeIsDark = false;
         }
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onStart() {
+        // проверяем не изменилась ли наша тема
+        if (isDarkTheme() != currentThemeIsDark) {
+            recreate();
+        }
+
+        super.onStart();
     }
 
     // Чтение настроек, параметр тема
     protected boolean isDarkTheme() {
         // Работаем через специальный класс сохранения и чтения настроек
         SharedPreferences sharedPref = getSharedPreferences(SHARED_PREFERENCE_KEY, MODE_PRIVATE);
-        //Прочитать тему, если настройка не найдена - взять по умолчанию true
+        //Прочитать тему, если настройка не найдена - взять по умолчанию false
         return sharedPref.getBoolean(IS_DARK_THEME, false);
     }
 
